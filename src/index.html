@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<head>
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <script>
+        function add_items(){
+            window.location.href = "add_records.php";
+        }
+        function summary(){
+            window.location.href = "summary.php";
+        }
+    </script>
+    <div class="container">
+        <h1 class="header">Financial tracker</h1>
+        <div class="button-container">
+            <div class="item">
+                <button class="button button1" onclick="add_items()">Add items</button>
+            </div>
+            <div class="item">
+                <button class="button button2" onclick="summary()">Summary</button>
+            </div>
+            <div class="item">
+                <button class="button button3" onclick="edit_items()">Edit items</button>
+            </div>
+        </div>
+    </div>
+</body>
