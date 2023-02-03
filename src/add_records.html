@@ -1,7 +1,12 @@
 <!DOCTYPE html>
 <head>
-    <link rel="stylesheet" href="../css/main.css">
-    <link rel="stylesheet" href="../css/add.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/add.css">
+    <script>
+        function return_home(){
+            window.location.href = "index.html";
+        }
+    </script>
 </head>
 <body>
     <button class="back button" onclick="return_home()">home page</button>
@@ -31,7 +36,7 @@
             <input type="number" name="Amount" step="0.01" min="0" placeholder="amount" autocomplete="off"><br/><br/>
             <input type="submit" value="add">
         </form>
-        <?php
+        <!-- <?php
         if ($_POST) {
             $server = "localhost";
             $username = "financial_tracker";
@@ -62,11 +67,7 @@
             }
             mysqli_close($conn);
         }
-        ?>
+        ?> -->
     </div>
-    <script>
-        function return_home(){
-            window.location.href = "../index.html";
-        }
-    </script>
+
 </body>

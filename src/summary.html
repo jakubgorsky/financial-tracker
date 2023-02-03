@@ -1,9 +1,15 @@
 <!DOCTYPE html>
 <head>
-    <link rel="stylesheet" href="../css/main.css">
-    <link rel="stylesheet" href="../css/summary.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/summary.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script>
+        function return_home(){
+            window.location.href = "index.html";
+        }
+    </script>
+    <script defer src="scripts/charts.js"></script>
 </head>
 <body>
     <button class="back button" onclick="return_home()">home page</button>
@@ -37,10 +43,4 @@
             </div>
         </div>
     </div>
-    <script>
-        function return_home(){
-            window.location.href = "../index.html";
-        }
-    </script>
-    <script src="../scripts/charts.js"></script>
 </body>
