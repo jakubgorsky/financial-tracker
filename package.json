@@ -1,24 +1,34 @@
 {
   "name": "financial-tracker",
   "productName": "financial-tracker",
-  "version": "1.0.0",
-  "description": "My Electron application description",
+  "version": "1.0.1",
+  "description": "A simple, personal finance tracking app",
   "main": "src/index.js",
   "scripts": {
+    "postinstall": "install-app-deps",
     "start": "electron-forge start",
     "package": "electron-forge package",
     "make": "electron-forge make",
     "publish": "electron-forge publish",
+    "rebuild": "electron-rebuild -f -w chart.js",
     "lint": "echo \"No linting configured\""
   },
   "keywords": [],
   "author": {
-    "name": "jakub_gorsky",
+    "name": "Jakub Górski",
     "email": "kuba.gorsky@gmail.com"
   },
   "license": "MIT",
   "dependencies": {
-    "electron-squirrel-startup": "^1.0.0"
+    "chart.js": "^4.2.0",
+    "electron-chartjs": "^1.0.0",
+    "electron-squirrel-startup": "^1.0.0",
+    "express": "^4.18.2",
+    "git": "^0.1.5",
+    "jquery": "^3.6.3",
+    "npm": "^9.4.1",
+    "sqlite-electron": "^2.2.5",
+    "sqlite3": "^5.1.4"
   },
   "devDependencies": {
     "@electron-forge/cli": "^6.0.4",
@@ -26,6 +36,7 @@
     "@electron-forge/maker-rpm": "^6.0.4",
     "@electron-forge/maker-squirrel": "^6.0.4",
     "@electron-forge/maker-zip": "^6.0.4",
-    "electron": "22.2.0"
+    "electron": "22.2.0",
+    "electron-builder": "^23.6.0"
   }
 }

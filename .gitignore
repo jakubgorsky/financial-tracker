@@ -87,3 +87,9 @@ typings/
 
 # Electron-Forge
 out/
+
+#3rd party
+3rd-party/
+
+#preloaded dev db
+data/financial_tracker.db

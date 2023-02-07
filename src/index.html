@@ -11,6 +11,14 @@
         function summary(){
             window.location.href = "summary.html";
         }
+        const electron = require("electron");
+        const ipc = electron.ipcRenderer;
+        document.addEventListener("DOMContentLoaded", function() {
+            ipc.send("mainWindowLoaded")
+            ipc.on("resultSent", function(e, result){
+                console.log(result);
+            });
+        });
     </script>
     <div class="container">
         <h1 class="header">Financial tracker</h1>

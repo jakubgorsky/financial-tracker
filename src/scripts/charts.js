@@ -1,6 +1,6 @@
-Chart.defaults.font.family = "'Raleway', sans-serif";
+window.$ = window.jQuery = require('jquery')
 
-// results = JSON.parse(results);
+Chart.defaults.font.family = "'Raleway', sans-serif";
 
 const type = {
     "-1": "undefined",
@@ -19,51 +19,37 @@ const type = {
     13: "car"
 }
 
-function stupidError(e){
-    return;
-}
-
-var monthly;
-
 function get_current_month_expenses(){
-    var expenses_labels = [];
-    var expenses_amounts = [];
-    var expenses_data = [];
-    var results = function() {
-        var temp = null;
-        $.ajax({
-            type: 'POST',
-            async: false,
-            global: false,
-            url: '../php/summary_operations.php',
-            dataType: "html",
-            data: {"func": "monthly"},
-            cache: true,
-            success: function(response){
-                temp = JSON.parse(response);
-            }
-        });
-        return temp;
-    }();
+    function runOnComplete(){
+        console.log(results);
+    }
+    var results;
+    var complete = false;
+    $.ajax({
+        method: 'GET',
+        async: false,
+        url: 'http://localhost:3000/expenses',
+        success: function(response) {
+            results = response;
+            complete = true;
+            console.log(results);
+        }
+    });
 
-    // $.post('../php/summary_operations.php', {"func": "monthly"},
-    //         function(reponse){
-    //             console.log(JSON.parse(response));
-    //         }, 'json');
+    var expenses_labels = []
+    var expenses_amounts = []
+    var expenses_data = []
 
-    try {
-        for (i in results){
-            if (results[i].type != 0){
-                expenses_labels.indexOf(type[results[i].type]) === -1 ? expenses_labels.push(type[results[i].type]) : stupidError(1);
-                expenses_data.push({type: type[results[i].type], amount: results[i].amount})
-            }
+    for (i in results){
+        console.log(results[i])
+        if (results[i].type != 0){
+            expenses_labels.indexOf(type[results[i].type]) === -1 ? expenses_labels.push(type[results[i].type]) : function(){return};
+            expenses_data.push({type: type[results[i].type], amount: results[i].amount})
         }
     }
-    catch(e){
-        stupidError(e);
-    }
+
     holder = {}
-    try {
+
     expenses_data.forEach(function(d) {
         if(holder.hasOwnProperty(d.type)){
             holder[d.type] = parseFloat(holder[d.type]) + parseFloat(d.amount);
@@ -71,27 +57,18 @@ function get_current_month_expenses(){
             holder[d.type] = parseFloat(d.amount);
         }
     });
-    }
-    catch(e){
-        stupidError(e);
-    }
 
-    try{
     for (var item in holder) {
         expenses_amounts.push(holder[item]);
     }
-    }
-    catch(e){
-        stupidError(e);
-    }
-    monthly = [expenses_labels, expenses_amounts, results]
+
     return [expenses_labels, expenses_amounts, results];
 }
 
-get_current_month_expenses()
-var expenses_labels = monthly[0];
-var expenses_amounts = monthly[1];
-var results_monthly = monthly[2]
+temp = get_current_month_expenses();
+var expenses_labels = temp[0];
+var expenses_amounts = temp[1];
+var results_monthly = temp[2];
 
 var total = 0;
 
@@ -107,9 +84,9 @@ type: 'doughnut',
 data: {
     labels: expenses_labels,
     datasets: [{
-    label: 'zł',
-    data: expenses_amounts,
-    borderWidth: 1
+        label: 'zł',
+        data: expenses_amounts,
+        borderWidth: 1,
     }]
 },
 options: {
@@ -135,68 +112,68 @@ options: {
 }
 });
 
-var budget_data;
+// var budget_data;
 
-function get_budget_data(){
-    var budget;
-    var income_result = function() {
-        var temp = null;
-        $.ajax({
-            type: "POST",
-            async: false,
-            global: false,
-            url: "php/summary_operations.php",
-            data: "func=income",
-            cache: false,
-            success: function(response){
-                temp = JSON.parse(response);
-            }
-        });
-        return temp;
-    }();
-    var income = [];
-    var income_temp = 0;
-    // var i = 0;
-    // while (i < income_result.length){
-    //     for (d in income_result){
-    //         if (income_result[i] == income_result[d].date){
-    //             income_temp += income_result[d];
-    //         }
-    //     }
-    //     i++;
-    // }
-    console.log(income);
-    // var results = function() {
-    //     var temp = null;
-    //     $.ajax({
-    //         type: "POST",
-    //         async: false,
-    //         global: false,
-    //         url: "php/summary_operations.php",
-    //         data: "func=def",
-    //         cache: true,
-    //         success: function(response){
-    //             temp = JSON.parse(response);
-    //         }
-    //     });
-    //     return temp;
-    // }();
+// function get_budget_data(){
+//     var budget;
+//     var income_result = function() {
+//         var temp = null;
+//         $.ajax({
+//             type: "POST",
+//             async: false,
+//             global: false,
+//             url: "php/summary_operations.php",
+//             data: "func=income",
+//             cache: false,
+//             success: function(response){
+//                 temp = JSON.parse(response);
+//             }
+//         });
+//         return temp;
+//     }();
+//     var income = [];
+//     var income_temp = 0;
+//     // var i = 0;
+//     // while (i < income_result.length){
+//     //     for (d in income_result){
+//     //         if (income_result[i] == income_result[d].date){
+//     //             income_temp += income_result[d];
+//     //         }
+//     //     }
+//     //     i++;
+//     // }
+//     console.log(income);
+//     // var results = function() {
+//     //     var temp = null;
+//     //     $.ajax({
+//     //         type: "POST",
+//     //         async: false,
+//     //         global: false,
+//     //         url: "php/summary_operations.php",
+//     //         data: "func=def",
+//     //         cache: true,
+//     //         success: function(response){
+//     //             temp = JSON.parse(response);
+//     //         }
+//     //     });
+//     //     return temp;
+//     // }();
 
-    for (i in results){
-        if(results.type == 0){
-            continue;
-        }
-        //
-    }
-    saving_threshold = []
-    saving_value = 500;
-    for (i in budget_data){
-        saving_threshold.push(saving_value);
-    }
-    return [budget, saving_threshold];
-}
+//     for (i in results){
+//         if(results.type == 0){
+//             continue;
+//         }
+//         //
+//     }
+//     saving_threshold = []
+//     saving_value = 500;
+//     for (i in budget_data){
+//         saving_threshold.push(saving_value);
+//     }
+//     return [budget, saving_threshold];
+// }
 
-// var temp_budget = get_budget_data();
+// // var temp_budget = get_budget_data();
 
 budget_data = [{x: '01.02.2023', y: 2736.00}, {x: '02.02.2023', y: 2000.00}, {x: '03.02.2023', y: 1943.54}, {x: '04.02.2023', y: 1870.2}];
 
