@@ -37,6 +37,10 @@ input[type=text], input[type=number], select, input[type=submit] {
     transition-duration: 0.2s;
 }
 
+input:focus, select:focus {
+    outline: 2px solid rgba(0,0,0,1);
+}
+
 input[type=submit] {
     background-color: #fff;
 }

@@ -1,6 +1,6 @@
 let express = require('express')
 let app = express()
-let finances = require('./models/expenses')
+let finances = require('./models/db_ops')
 
 app.get('/expenses', function(req, res){
     finances.getExpenses().then(function (response){
