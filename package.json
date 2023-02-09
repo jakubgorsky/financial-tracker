@@ -1,7 +1,7 @@
 {
   "name": "financial-tracker",
   "productName": "financial-tracker",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A simple, personal finance tracking app",
   "main": "src/index.js",
   "scripts": {

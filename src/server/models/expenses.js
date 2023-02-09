@@ -1,5 +1,5 @@
 let sqlite = require('sqlite3')
-let db = new sqlite.Database('./data/financial_tracker.db')
+let db = new sqlite.Database('./data/dev.db')
 
 module.exports.getExpenses = function() {
 
@@ -14,7 +14,21 @@ module.exports.getExpenses = function() {
             })
         })
     })
+}
 
+module.exports.getType = function() {
+
+    return new Promise(function(resolve, reject){
+        db.serialize(function (){
+            db.all('SELECT * FROM type', function(err, rows){
+                if(!err){
+                    resolve(rows)
+                } else {
+                    reject(err)
+                }
+            })
+        })
+    })
 }
 
 // module.exports.writeExpenses = function() {

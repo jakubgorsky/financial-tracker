@@ -2,51 +2,60 @@ window.$ = window.jQuery = require('jquery')
 
 Chart.defaults.font.family = "'Raleway', sans-serif";
 
-const type = {
-    "-1": "undefined",
-    1: "alcohol",
-    2: "detergents",
-    3: "energy drinks",
-    4: "food",
-    5: "snacks",
-    6: "restaurants",
-    7: "household",
-    8: "other",
-    9: "installments",
-    10: "income",
-    11: "subscriptions",
-    12: "e-cig",
-    13: "car"
+var type = {}
+
+async function fetch_types() {
+    var res;
+    var complete = false;
+    await $.ajax({
+        method: 'GET',
+        async: true,
+        url: 'http://localhost:3000/types',
+        success: function(response) {
+            res = response
+            complete = true;
+            console.log("[CHARTS.JS | FETCH_TYPES | AJAX REQUEST] Successfully fetched types")
+        }
+    })
+    for (i in res){
+        type[i] = res[i].type_desc;
+    }
+    return res;
 }
 
-function get_current_month_expenses(){
+async function fetch_expenses(){
+    var complete = false;
+    var res;
+    await $.ajax({
+        method: 'GET',
+        url: 'http://localhost:3000/expenses',
+        success: function(response) {
+            res = response
+            complete = true
+            console.log("[CHARTS.JS | FETCH_EXPENSES | AJAX REQUEST] Successfully fetched expenses")
+        }})
+    return res;
+}
+
+async function parse_expenses(){
+    await fetch_types();
     function runOnComplete(){
         console.log(results);
     }
     var results;
-    var complete = false;
-    $.ajax({
-        method: 'GET',
-        async: false,
-        url: 'http://localhost:3000/expenses',
-        success: function(response) {
-            results = response;
-            complete = true;
-            console.log(results);
-        }
-    });
-
-    var expenses_labels = []
-    var expenses_amounts = []
-    var expenses_data = []
+    var expenses_labels = [];
+    var expenses_amounts = [];
+    var expenses_data = [];
+    results = await fetch_expenses()
 
     for (i in results){
-        console.log(results[i])
-        if (results[i].type != 0){
+        if (results[i].type >= 0){
             expenses_labels.indexOf(type[results[i].type]) === -1 ? expenses_labels.push(type[results[i].type]) : function(){return};
-            expenses_data.push({type: type[results[i].type], amount: results[i].amount})
+            expenses_data.push({type: type[results[i].type], amount: results[i].amount});
+            console.log(expenses_labels.indexOf(type[results[i].type]));
         }
     }
+    console.log(expenses_labels);
 
     holder = {}
 
@@ -65,52 +74,59 @@ function get_current_month_expenses(){
     return [expenses_labels, expenses_amounts, results];
 }
 
-temp = get_current_month_expenses();
-var expenses_labels = temp[0];
-var expenses_amounts = temp[1];
-var results_monthly = temp[2];
-
-var total = 0;
-
-for (i in results_monthly){
-    $("#monthly-expenses-table").append("<tr><td>"+type[results_monthly[i].type]+"</td><td>"+results_monthly[i].description+"</td><td>"+(parseFloat(results_monthly[i].amount)).toFixed(2)+"</td><td>"+results_monthly[i].date+"</td></tr>");
-    total += parseFloat(results_monthly[i].amount);
-}
-$("#monthly-expenses-table").append("<tr><td colspan='2'><b>total</b></td><td colspan='2'><b>"+total.toFixed(2)+"</b></td></tr>");
-
-const monthly_expenses = $('#monthly-expenses');
-new Chart(monthly_expenses, {
-type: 'doughnut',
-data: {
-    labels: expenses_labels,
-    datasets: [{
-        label: 'zł',
-        data: expenses_amounts,
-        borderWidth: 1,
-    }]
-},
-options: {
-    scales: {
-    y: {
-        beginAtZero: true
+async function draw_expenses_chart(){
+    var total = 0;
+    var temp = null;
+    var expenses_labels = [];
+    var expenses_amounts = [];
+    var results_monthly = [];
+    var me_chart;
+    temp = await parse_expenses();
+    expenses_labels = temp[0];
+    expenses_amounts = temp[1];
+    results_monthly = temp[2];
+    for (i in results_monthly){
+        $("#monthly-expenses-table").append("<tr><td>"+type[results_monthly[i].type]+"</td><td>"+results_monthly[i].description+"</td><td>"+(parseFloat(results_monthly[i].amount)).toFixed(2)+"</td><td>"+results_monthly[i].date+"</td></tr>");
+        total += parseFloat(results_monthly[i].amount);
     }
+    $("#monthly-expenses-table").append("<tr><td colspan='2'><b>total</b></td><td colspan='2'><b>"+total.toFixed(2)+"</b></td></tr>");
+
+    const monthly_expenses = $('#monthly-expenses');
+    me_chart = new Chart(monthly_expenses, {
+    type: 'doughnut',
+    data: {
+        labels: expenses_labels,
+        datasets: [{
+            label: 'zł',
+            data: expenses_amounts,
+            borderWidth: 1,
+        }]
     },
-    responsive: true,
-    layout: {
-        padding: 20
-    },
-    plugins: {
-        title: {
-            text: 'monthly expenses (pln)',
-            align: 'center',
-            display: true,
-            position: 'top',
-            fullSize: true,
-            font: { size: 20+'rem' }
+    options: {
+        scales: {
+        y: {
+            beginAtZero: true
+        }
+        },
+        responsive: true,
+        layout: {
+            padding: 20
+        },
+        plugins: {
+            title: {
+                text: 'monthly expenses (pln)',
+                align: 'center',
+                display: true,
+                position: 'top',
+                fullSize: true,
+                font: { size: 20+'rem' }
+            }
         }
     }
+    });
 }
-});
+
+draw_expenses_chart();
 
 // var budget_data;
 

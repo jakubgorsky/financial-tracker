@@ -1,9 +1,17 @@
 let express = require('express')
 let app = express()
-let post = require('./models/expenses')
+let finances = require('./models/expenses')
 
 app.get('/expenses', function(req, res){
-    post.getExpenses().then(function (response){
+    finances.getExpenses().then(function (response){
+        res.json(response)
+    }).catch(function(){
+        console.log(response)
+    })
+})
+
+app.get('/types', function(req, res){
+    finances.getType().then(function (response){
         res.json(response)
     }).catch(function(){
         console.log(response)
