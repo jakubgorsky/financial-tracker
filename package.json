@@ -1,7 +1,7 @@
 {
   "name": "financial-tracker",
   "productName": "financial-tracker",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A simple, personal finance tracking app",
   "main": "src/index.js",
   "scripts": {
@@ -39,5 +39,10 @@
     "@electron-forge/maker-zip": "^6.0.4",
     "electron": "22.2.0",
     "electron-builder": "^22.10.3"
+  },
+  "build": {
+    "extraResources": [
+      "data"
+    ]
   }
 }
