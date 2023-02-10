@@ -28,7 +28,7 @@ body {
     z-index: 2;
 }
 
-input[type=text], input[type=number], select, input[type=submit] {
+input[type=text], input[type=number], select, input[type=submit], input[type=date] {
     padding: 2rem;
     font-size: 2rem;
     border-radius: 1rem;

@@ -1,6 +1,67 @@
 window.$ = window.jQuery = require('jquery')
 var type_select = $("#Type");
+var amount = $("#amnt");
+var description = $("#desc");
 var type = {}
+var date = $("#date");
+
+$(function() {
+    setDefaultDate();
+});
+
+$("form").on("submit", async function(e) {
+    e.preventDefault();
+    var empty = false;
+    $("form").children().each(function() {
+        if(this.previousSibling.nodeName == "br"){
+            return;
+        }
+        if (this.value == '' || this.value == 0){
+            this.style.outline = "2px solid red";
+            this.style.backgroundColor = "rgba(255,0,0,0.1)";
+            empty = true;
+        } else {
+            this.style.outline = "none";
+            this.style.backgroundColor = "rgba(0,0,0,0)";
+        }
+    });
+    if (!empty){
+        var data = {
+            "type": type_select.val(),
+            "desc": description.val(),
+            "amnt": amount.val(),
+            "date": date.val(),
+        }
+        type_select.val(0)
+        description.val('')
+        amount.val('')
+        await $.ajax({
+            method: 'POST',
+            async: true,
+            data: "type="+data.type+"&desc="+data.desc+"&amnt="+data.amnt+"&date="+data.date,
+            contentType: "application/x-www-form-urlencoded",
+            url: 'http://localhost:3000/add_expenses',
+            success: function(response) {
+                res = response
+                complete = true;
+                console.log("[ADD_RECORDS.JS | INSERT_VALUES | AJAX REQUEST] Successfully inserted expenses")
+            }
+        })
+    }
+});
+
+type_select.on("change", function() {
+    type_select.css({"outline": "none", "background-color": "rgba(0,0,0,0)"})
+})
+
+amount.on("keyup", function() {
+    amount.css({"outline": "none", "background-color": "rgba(0,0,0,0)"})
+})
+
+description.on("keyup", function() {
+    description.css({"outline": "none", "background-color": "rgba(0,0,0,0)"})
+})
+
 
 async function fetch_types() {
     var res;
@@ -35,3 +96,15 @@ async function draw_types() {
 (async () => {
     await draw_types()
 })();
+
+function setDefaultDate() {
+    var now = new Date();
+    var month = (now.getMonth() + 1);
+    var day = now.getDate();
+    if (month < 10)
+        month = "0" + month;
+    if (day < 10)
+        day = "0" + day;
+    var today = now.getFullYear() + '-' + month + '-' + day;
+    date.val(today);
+}

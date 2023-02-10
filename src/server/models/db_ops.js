@@ -17,7 +17,6 @@ module.exports.getExpenses = function() {
 }
 
 module.exports.getType = function() {
-
     return new Promise(function(resolve, reject){
         db.serialize(function (){
             db.all('SELECT * FROM type', function(err, rows){
@@ -31,8 +30,20 @@ module.exports.getType = function() {
     })
 }
 
-// module.exports.writeExpenses = function() {
-//     return new Promise(function(resolve, reject){
+module.exports.insertExpenses = function(data) {
+    return new Promise(function(resolve, reject){
+        db.serialize(function (){
+            var sql = 'INSERT INTO expenses (type, description, amount, date) VALUES(' + parseInt(data.type) + ', "' + data.desc + '", ' + parseFloat(data.amnt) +", strftime('%Y-%m-%d','"+data.date+"'));";
+            console.log(sql);
+            db.all(sql, function(err, rows){
+                if(!err){
+                    resolve(rows)
+                    console.log(data);
+                } else {
+                    reject(err)
+                }
+            })
+        })
+    })
+}
 
-//     })
-// }

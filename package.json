@@ -20,6 +20,7 @@
   },
   "license": "MIT",
   "dependencies": {
+    "body-parser": "^1.20.1",
     "chart.js": "^4.2.0",
     "electron-chartjs": "^1.0.0",
     "electron-squirrel-startup": "^1.0.0",
@@ -37,6 +38,6 @@
     "@electron-forge/maker-squirrel": "^6.0.4",
     "@electron-forge/maker-zip": "^6.0.4",
     "electron": "22.2.0",
-    "electron-builder": "^23.6.0"
+    "electron-builder": "^22.10.3"
   }
 }
