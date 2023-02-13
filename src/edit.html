@@ -9,8 +9,32 @@
             window.location.href = "index.html";
         }
     </script>
-    <button class="back button" onclick="return_home()">home page</button>
+    <script defer src="scripts/edit.js"></script>
     <div class="grid-container">
-        <h1 class="header">Edit items</h1>
+        <button class="home button standout" onclick="return_home()"><img src="icons/100/icons8-home-page-100.png"></button>
+        <div class="standout header"><h1>Edit items</h1></div>
+        <div class="picker standout" id="picker">
+            <div class="button-container" id="button-container">
+                <button class="picker-item active">expenses</button>
+                <button class="picker-item">incomes</button>
+                <button class="picker-item">types</button>
+            </div>
+        </div>
+        <div id="table" class="table-container standout">
+            <table id="records">
+            </table>
+        </div>
+        <div class="footer standout"><h1>financial tracker v1.0.4-beta by Jakub Górski [THIS IS A PREPRODUCTION VERSION. END PRODUCT SUBJECT TO CHANGES]</h1></div>
     </div>
+    <script>
+        var button_container = document.getElementById("button-container");
+        var buttons = button_container.getElementsByClassName("picker-item");
+        for (var i = 0; i < buttons.length; i++) {
+            buttons[i].addEventListener("click", function() {
+            var current = document.getElementsByClassName("active");
+            current[0].className = current[0].className.replace(" active", "");
+            this.className += " active";
+            });
+        }
+    </script>
 </body>
