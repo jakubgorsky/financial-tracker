@@ -92,4 +92,4 @@ out/
 3rd-party/
 
 #preloaded dev db
-data/dev.db
+dev/

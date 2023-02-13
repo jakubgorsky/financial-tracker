@@ -10,17 +10,17 @@
     <script defer src="scripts/add_records.js"></script>
 </head>
 <body>
-    <button class="back button" onclick="return_home()">home page</button>
-    <div class="container">
-        <h1>Add an item</h1>
+    <div class="grid-container">
+        <button class="home button standout" onclick="return_home()"><img src="icons/100/icons8-home-page-100.png"></button>
+        <div class="standout header"><h1>Add an item</h1></div>
         <form name="data" class="form" method="POST">
-            <select id="Type" name="type">
-            </select><br/>
-            <input id="desc" type="text" name="desc" placeholder="description" autocomplete="off"><br/>
-            <input id="amnt" type="number" name="amnt" step="0.01" min="0" placeholder="amount" autocomplete="off"><br/><br/>
-            <input id="date" type="date" name="date"><br/><br/>
-            <input type="submit" value="add">
+            <select id="Type" name="type"></select>
+            <input id="desc" type="text" name="desc" placeholder="description" autocomplete="off">
+            <input id="amnt" type="number" name="amnt" step="0.01" min="0" placeholder="amount" autocomplete="off">
+            <input id="date" type="date" name="date">
+            <input id="submit" type="submit" value="add">
         </form>
+        <div class="footer standout"><h1>financial tracker v1.0.4-beta by Jakub Górski [THIS IS A PREPRODUCTION VERSION. END PRODUCT SUBJECT TO CHANGES]</h1></div>
     </div>
 
 </body>

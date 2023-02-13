@@ -1,35 +1,72 @@
-body {
-    background: #f2f2f2;
-    text-transform: lowercase;
+.grid-container {
+    grid-template-columns: 2rem 5rem 2rem 1fr 2rem 5rem 2rem;
+    grid-template-rows: 5rem 5rem 10rem 1fr 2rem 4rem 1.5rem;
+    grid-template-areas:
+        ". . . . . . ."
+        ". home . header . . ."
+        ". . . . . . ."
+        ". . . form . . ."
+        ". . . . . . ."
+        "footer . . . . . ."
+        ". . . . . . ."
 }
 
-.button {
-    height: 4rem;
-    width: 20rem;
-    background: #fff;
-    font-size: 2rem;
-    border-radius: 1rem;
-    border: 1px solid rgba(0,0,0,0.4);
-    box-shadow: 1rem 1rem rgba(20,20,20,0.4);
+.header:hover {
+    cursor:default;
+}
+
+.form {
+    grid-area: form;
+    display: grid;
+    grid-template-rows: 5rem 2rem 5rem 2rem 5rem 2rem 5rem 2rem 5rem;
+    grid-template-areas:
+        "select"
+        "."
+        "text"
+        "."
+        "number"
+        "."
+        "date"
+        "."
+        "submit";
+    row-gap: 1rem;
+}
+#Type {
+    grid-area: select;
+}
+#desc {
+    grid-area: text;
+}
+#amnt {
+    grid-area: number;
+}
+#date {
+    grid-area: date;
+}
+#submit {
+    grid-area:submit;
+}
+
+.home {
+    grid-area: home;
+}
+
+.home img {
+    width: 3rem;
+    height: 3rem;
+    margin: 1rem;
     transition-duration: 0.2s;
-    text-transform: lowercase;
-    align-self: flex-start;
-    justify-self: flex-start;
 }
 
-.button:hover {
-    cursor:pointer;
-    font-size: 2rem;
-    box-shadow: 1.1rem 1.1rem 0.2rem rgba(20,20,20,0.4);
-    background: rgba(100,100,100,1);
-    border: 2px solid rgba(0,0,0,1);
-    text-shadow: 0.5rem 0.5rem rgba(0,0,0,0.2);
-    color: white;
-    z-index: 2;
+.home:hover img {
+    width: 3.5rem;
+    height: 3.5rem;
+    margin: 0.75rem;
+    filter: invert(100%) drop-shadow(0.5rem 0.5rem rgba(0,0,0,0.2));
 }
 
 input[type=text], input[type=number], select, input[type=submit], input[type=date] {
-    padding: 2rem;
+    padding: 0 2rem 0 2rem;
     font-size: 2rem;
     border-radius: 1rem;
     border: 1px solid rgba(0,0,0,0.4);
@@ -51,24 +88,6 @@ input[type=text]:hover, input[type=number]:hover, select:hover {
     background: #eee;
 }
 
-.container {
-    display: flex;
-    flex-flow: column wrap;
-    align-content: center;
-    justify-content: center;
-    height: 100%;
-    width: 97%;
-    row-gap: 1rem;
-}
-
-label {
-    font-size: 2rem;
-    background: #fff;
-    padding: 2rem;
-    border-radius: 1rem;
-    box-shadow: 1rem 1rem rgba(20,20,20,0.4);
-}
-
 select {
     cursor: pointer;
 }
@@ -82,28 +101,4 @@ input[type=submit]:hover {
     text-shadow: 0.5rem 0.5rem rgba(0,0,0,0.2);
     color: white;
     z-index: 2;
-}
-
-.form {
-    display: flex;
-    flex-flow: column wrap;
-    row-gap: 1rem;
-}
-
-#alert {
-    animation-delay: 2s;
-    animation: fadeOut 2s linear;
-    opacity: 0;
-}
-
-@keyframes fadeOut{
-    0% {
-        opacity: 1;
-    }
-    50% {
-        opacity: 1;
-    }
-    100% {
-        opacity: 0;
-    }
 }

@@ -1,7 +1,7 @@
 {
   "name": "financial-tracker",
   "productName": "financial-tracker",
-  "version": "1.0.3",
+  "version": "1.0.3.1",
   "description": "A simple, personal finance tracking app",
   "main": "src/index.js",
   "scripts": {
@@ -9,6 +9,7 @@
     "start": "electron-forge start",
     "package": "electron-forge package",
     "make": "electron-forge make",
+    "build": "electron-builder build",
     "publish": "electron-forge publish",
     "rebuild": "electron-rebuild -f -w chart.js",
     "lint": "echo \"No linting configured\""
@@ -39,10 +40,5 @@
     "@electron-forge/maker-zip": "^6.0.4",
     "electron": "22.2.0",
     "electron-builder": "^22.10.3"
-  },
-  "build": {
-    "extraResources": [
-      "data"
-    ]
   }
 }

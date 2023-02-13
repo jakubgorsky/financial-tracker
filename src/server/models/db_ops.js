@@ -1,6 +1,7 @@
 let sqlite = require('sqlite3')
 const path = require('path')
-const dbPath = path.resolve(process.resourcesPath, 'app/data/financial_tracker.db')
+// const dbPath = path.resolve(process.resourcesPath, 'app/data/financial_tracker.db')
+const dbPath = 'dev/dev.db'
 let db = new sqlite.Database(dbPath)
 
 module.exports.getExpenses = function() {

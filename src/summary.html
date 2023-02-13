@@ -13,35 +13,34 @@
     <script defer src="scripts/charts.js"></script>
 </head>
 <body>
-    <button class="back button" onclick="return_home()">home page</button>
-    <div class="container">
-        <h1>summary</h1>
-        <div class="grid-container" id="charts-container">
-            <div id="monthly-expenses-container" class="item">
+    <div class="grid-container">
+        <button class="home button standout" onclick="return_home()"><img src="icons/100/icons8-home-page-100.png"></button>
+        <div class="standout header"><h1>summary</h1></div>
+        <div class="charts-container" id="charts-container">
+            <div id="monthly-expenses-container" class="standout chart">
                 <canvas id="monthly-expenses"></canvas>
             </div>
-            <div id="monthly-expenses-list" class="item">
-                    <div class="table-container">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>type</th>
-                                    <th>descrption</th>
-                                    <th>amount</th>
-                                    <th>date</th>
-                                </tr>
-                            </thead>
-                            <tbody id="monthly-expenses-table">
-                            </tbody>
-                        </table>
-                    </div>
-            </div>
-            <div id="chart2-container" class="item">
+                <div class="table-container standout">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>type</th>
+                                <th>descrption</th>
+                                <th>amount</th>
+                                <th>date</th>
+                            </tr>
+                        </thead>
+                        <tbody id="monthly-expenses-table">
+                        </tbody>
+                    </table>
+                </div>
+            <div id="chart2-container" class="standout chart">
                 <canvas id="chart2"></canvas>
             </div>
-            <div id="chart3-container" class="item">
+            <div id="chart3-container" class="standout chart">
                 <canvas id="chart3"></canvas>
             </div>
         </div>
+        <div class="footer standout"><h1>financial tracker v1.0.4-beta by Jakub Górski [THIS IS A PREPRODUCTION VERSION. END PRODUCT SUBJECT TO CHANGES]</h1></div>
     </div>
 </body>
