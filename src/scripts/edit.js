@@ -41,11 +41,11 @@ async function fetch_expenses(){
 }
 
 async function draw_table(){
-    var results = await fetch_expenses();
+    // var results = await fetch_expenses();
 
-    for (i in results){
-        $("#records").append("<tr><td>"+type[results[i].type]+"</td><td>"+results[i].description+"</td><td>"+(parseFloat(results[i].amount)).toFixed(2)+"</td><td>"+results[i].date+"</td><td></td></tr>");
-    }
+    // for (i in results){
+    //     $("#records").append("<tr><td>"+type[results[i].type]+"</td><td>"+results[i].description+"</td><td>"+(parseFloat(results[i].amount)).toFixed(2)+"</td><td>"+results[i].date+"</td><td></td></tr>");
+    // }
 }
 
 draw_table();
