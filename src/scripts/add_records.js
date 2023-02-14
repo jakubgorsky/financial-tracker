@@ -13,25 +13,26 @@ $("form").on("submit", async function(e) {
     e.preventDefault();
     var empty = false;
     $("form").children().each(function() {
-        if(this.previousSibling.nodeName == "br"){
+        if(this.previousSibling.nodeName == "br" || this.previousSibling.nodeType == "submit"){
             return;
         }
         if (this.value == '' || this.value == 0){
             this.style.outline = "2px solid red";
             this.style.backgroundColor = "rgba(255,0,0,0.1)";
             empty = true;
-        } else {
-            this.style.outline = "none";
-            this.style.backgroundColor = "rgba(0,0,0,0)";
         }
     });
     if (!empty){
+        var info = $("#info");
+        info.addClass("show");
+        setTimeout(function() {info.removeClass("show");}, 3000);
         var data = {
             "type": type_select.val(),
             "desc": description.val(),
             "amnt": amount.val(),
             "date": date.val(),
         }
+        $("#submit").css({"outline": "none", "background-color": "none"});
         type_select.val(0)
         description.val('')
         amount.val('')
@@ -44,7 +45,14 @@ $("form").on("submit", async function(e) {
             success: function(response) {
                 res = response
                 complete = true;
+                $("#info-text").text("Added record successfully")
                 console.log("[ADD_RECORDS.JS | INSERT_VALUES | AJAX REQUEST] Successfully inserted expenses")
+            },
+            error: function(response) {
+                res = response
+                complete = true;
+                $("#info-text").text(response)
+                console.log("[ADD_RECORDS.JS | INSERT_VALUES | AJAX REQUEST] An error occured: " + response);
             }
         })
     }

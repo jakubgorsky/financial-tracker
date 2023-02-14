@@ -1,7 +1,7 @@
 {
   "name": "financial-tracker",
   "productName": "financial-tracker",
-  "version": "1.0.3.1",
+  "version": "1.0.3.2",
   "description": "A simple, personal finance tracking app",
   "main": "src/index.js",
   "scripts": {
@@ -30,7 +30,8 @@
     "jquery": "^3.6.3",
     "npm": "^9.4.1",
     "sqlite-electron": "^2.2.5",
-    "sqlite3": "^5.1.4"
+    "sqlite3": "^5.1.4",
+    "tabulator-tables": "^5.4.3"
   },
   "devDependencies": {
     "@electron-forge/cli": "^6.0.4",

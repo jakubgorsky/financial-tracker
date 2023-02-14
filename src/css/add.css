@@ -4,11 +4,55 @@
     grid-template-areas:
         ". . . . . . ."
         ". home . header . . ."
-        ". . . . . . ."
+        ". . . info . . ."
         ". . . form . . ."
         ". . . . . . ."
         "footer . . . . . ."
         ". . . . . . ."
+}
+
+#info {
+    display: flex;
+    grid-area: info;
+    visibility: hidden;
+    min-width: 10rem;
+    font-size: 1.5rem;
+    justify-content: center;
+    justify-items: center;
+    z-index: 1;
+    height: 5rem;
+    align-self: center;
+}
+
+#info.show {
+    visibility: visible;
+    -webkit-animation: fadein 0.5s, fadeout 0.5s, 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+#info span {
+    text-align: center;
+    align-self: center;
+    justify-self: center;
+}
+
+@-webkit-keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 5.5rem; opacity: 1;}
+}
+
+@keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 5.5rem; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+    from {bottom: 5.5rem; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+}
+@keyframes fadeout {
+    from {bottom: 5.5rem; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
 }
 
 .header:hover {
@@ -18,33 +62,58 @@
 .form {
     grid-area: form;
     display: grid;
+    grid-template-columns: 1fr 2rem 5rem;
     grid-template-rows: 5rem 2rem 5rem 2rem 5rem 2rem 5rem 2rem 5rem;
     grid-template-areas:
-        "select"
-        "."
-        "text"
-        "."
-        "number"
-        "."
-        "date"
-        "."
-        "submit";
+        "select . add"
+        ". . ."
+        "text . ."
+        ". . ."
+        "number . ."
+        ". . ."
+        "date . ."
+        ". . ."
+        "submit . .";
     row-gap: 1rem;
 }
+
+#add-type {
+    grid-area: add;
+}
+
+#add-type img {
+    width: 3rem;
+    height: 3rem;
+    margin: 1rem;
+    transition-duration: 0.2s;
+}
+
+#add-type:hover img {
+    width: 3.5rem;
+    height: 3.5rem;
+    margin: 0.75rem;
+    filter: invert(100%) drop-shadow(0.5rem 0.5rem rgba(0,0,0,0.2));
+}
+
 #Type {
     grid-area: select;
+    grid-column: 1 / span 1;
 }
 #desc {
     grid-area: text;
+    grid-column: 1 / span 3;
 }
 #amnt {
     grid-area: number;
+    grid-column: 1 / span 3;
 }
 #date {
     grid-area: date;
+    grid-column: 1 / span 3;
 }
 #submit {
     grid-area:submit;
+    grid-column: 1 / span 3;
 }
 
 .home {
@@ -101,4 +170,10 @@ input[type=submit]:hover {
     text-shadow: 0.5rem 0.5rem rgba(0,0,0,0.2);
     color: white;
     z-index: 2;
+}
+
+input[type=submit]::after {
+    background: white;
+    color: black;
+    text-decoration: none;
 }
