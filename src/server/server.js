@@ -32,3 +32,11 @@ app.post('/add_expenses', function(req, res) {
         console.log(e)
     })
 })
+
+app.post('/add_type', function(req, res) {
+    finances.insertType(req.body).then(function (response){
+        res.json(response)
+    }).catch(function(e){
+        console.log(e)
+    })
+})

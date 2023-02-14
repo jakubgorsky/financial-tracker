@@ -12,6 +12,11 @@ body {
     text-transform: lowercase;
 }
 
+a {
+    color: black;
+    text-decoration: none;
+}
+
 .standout {
     background: #fff;
     font-size: 2rem;
@@ -48,21 +53,18 @@ body {
 }
 
 .footer {
-    display: flex;
-    align-content: stretch;
-    flex-grow: 1;
-    justify-content: right;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     grid-area: footer;
     grid-column: 2 / span 5;
+    padding: 0.5rem;
 }
 .footer h1 {
     margin-right: 1rem;
     color: rgba(0,0,0,0.6);
-    font-size: 1rem !important;
+    font-size: 0.75rem !important;
     line-height: 1.5rem;
     align-self: center;
-    vertical-align: middle;
-    text-align: right;
 }
 
 .header {

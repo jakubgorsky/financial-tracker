@@ -50,3 +50,19 @@ module.exports.insertExpenses = function(data) {
     })
 }
 
+module.exports.insertType = function(data) {
+    return new Promise(function(resolve, reject){
+        db.serialize(function (){
+            var sql = "INSERT INTO type (type_desc) VALUES('"+ data.type_desc +"');";
+            console.log(sql);
+            db.all(sql, function(err, rows){
+                if(!err){
+                    resolve(rows)
+                    console.log(data);
+                } else {
+                    reject(err)
+                }
+            })
+        })
+    })
+}

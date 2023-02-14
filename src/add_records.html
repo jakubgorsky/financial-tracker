@@ -14,18 +14,19 @@
 </head>
 <body>
     <div class="grid-container">
-        <button class="home button standout" onclick="return_home()"><img src="icons/100/icons8-home-page-100.png"></button>
+        <button class="home button standout" onclick="return_home()"><img src="icons/100/icons8-back-arrow-100.png"></button>
         <div class="standout header"><h1>Add an item</h1></div>
         <form name="data" class="form" method="POST">
-            <div id="add-type" class="button standout" onclick="foo()"><img src="icons/100/icons8-add-100.png"></div>
+            <input type="text" id="new-type" placeholder="new type name" autocomplete="off">
+            <div id="add-type" class="button standout" onclick="showTypeAddition()"><img src="icons/100/icons8-add-100.png"></div>
+            <div id="save-type" class="button standout" onclick="addTypes()"><img src="icons/100/icons8-save-100.png"></div>
             <select id="Type" name="type"></select>
             <input id="desc" type="text" name="desc" placeholder="description" autocomplete="off">
             <input id="amnt" type="number" name="amnt" step="0.01" min="0" placeholder="amount" autocomplete="off">
             <input id="date" type="date" name="date">
             <input id="submit" type="submit" value="add">
         </form>
-        <div class="footer standout"><h1>financial tracker v1.0.4-beta by Jakub Górski [THIS IS A PREPRODUCTION VERSION. END PRODUCT SUBJECT TO CHANGES]</h1></div>
-        <div id="info" class="standout"><span id="info-text"></span></div>
+        <div class="footer standout"><h1 class="left">icons by <a href="https://icons8.com/" target="_blank">icons8</a></h1><h1 class="right">financial tracker v1.0.4-beta by Jakub Górski [THIS IS A PREPRODUCTION VERSION. END PRODUCT SUBJECT TO CHANGES]</h1></div>        <div id="info" class="standout"><span id="info-text"></span></div>
     </div>
 
 </body>

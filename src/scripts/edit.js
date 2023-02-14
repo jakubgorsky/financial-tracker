@@ -26,6 +26,7 @@ async function fetch_types() {
 })();
 
 async function fetch_expenses(){
+    await fetch_types();
     var complete = false;
     var res;
     await $.ajax({

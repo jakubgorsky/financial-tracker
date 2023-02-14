@@ -3,7 +3,7 @@
     grid-template-rows: 5rem 5rem 2rem 5rem 2rem 1fr 2rem 4rem 1.5rem;
     grid-template-areas:
         ". . . . . . ."
-        ". home . header . . ."
+        ". . . header . home ."
         ". . . . . . ."
         ". . . picker . . ."
         ". . . . . . ."

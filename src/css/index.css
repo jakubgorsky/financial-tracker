@@ -12,13 +12,39 @@ div {
 .grid-container {
     grid-template-areas:
         ". . . . . . ."
-        ". . . header . settings ."
+        ". settings . header . close ."
         ". . . . . . ."
         ". . . buttons . . ."
         ". . . . . . ."
         ". . . . . . ."
         "footer . . . . . ."
         ". . . . . . .";
+}
+
+.right {
+    text-align: right;
+}
+
+.left {
+    text-align: left;
+}
+
+.close {
+    grid-area: close;
+}
+
+.close img {
+    width: 3rem;
+    height: 3rem;
+    margin: 1rem;
+    transition-duration: 0.2s;
+}
+
+.close:hover img {
+    width: 3.5rem;
+    height: 3.5rem;
+    margin: 0.75rem;
+    filter: invert(100%) drop-shadow(0.5rem 0.5rem rgba(0,0,0,0.2));
 }
 
 .settings {
