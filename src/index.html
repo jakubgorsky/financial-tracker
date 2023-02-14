@@ -4,7 +4,12 @@
     <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
-    <script>
+    <script defer>
+        const ipc = require('electron').ipcRenderer;
+        function close() {
+            console.log("closing")
+            ipc.send('close');
+        }
         function add_items(){
             window.location.href = "add_records.html";
         }
@@ -14,9 +19,8 @@
         function edit_items(){
             window.location.href = "edit.html";
         }
-        const electron = require("electron");
-        const ipc = electron.ipcRenderer;
         document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById("close").addEventListener('click', close);
             ipc.send("mainWindowLoaded")
             ipc.on("resultSent", function(e, result){
                 console.log(result);
@@ -24,7 +28,7 @@
         });
     </script>
     <div class="grid-container">
-        <button class="close button standout" onclick="close()"><img src="icons/100/icons8-close-100.png"></button>
+        <button id="close" class="close button standout" onclick="close()"><img onclick="close()" src="icons/100/icons8-close-100.png"></button>
         <div class="header standout"><h1>Financial tracker</h1></div>
         <button class="button settings standout" onclick="settings()"><img src="icons/100/icons8-support.svg"></button>
         <div class="buttons-container">
