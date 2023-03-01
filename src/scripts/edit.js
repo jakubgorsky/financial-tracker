@@ -1,4 +1,7 @@
 window.$ = window.jQuery = require('jquery')
+const { TouchBarSegmentedControl } = require('electron');
+const Tabulator = require('tabulator-tables')
+
 
 var type = {}
 
@@ -12,7 +15,7 @@ async function fetch_types() {
         success: function(response) {
             res = response
             complete = true;
-            console.log("[CHARTS.JS | FETCH_TYPES | AJAX REQUEST] Successfully fetched types")
+            console.log("[EDIT.JS | FETCH_TYPES | AJAX REQUEST] Successfully fetched types")
         }
     })
     for (i in res){
@@ -35,17 +38,38 @@ async function fetch_expenses(){
         success: function(response) {
             res = response
             complete = true
-            console.log("[CHARTS.JS | FETCH_EXPENSES | AJAX REQUEST] Successfully fetched expenses")
+            console.log("[EDIT.JS | FETCH_EXPENSES | AJAX REQUEST] Successfully fetched expenses")
         }})
     return res;
 }
 
-async function draw_table(){
-    // var results = await fetch_expenses();
+// var typeEditor = async function(cell, onRendered, success, cancel){
+//     await fetch_types();
+//     var cellValue = cell.getValue();
+//     input = document.createElement("select");
+//     input.id = "typeSelect";
 
-    // for (i in results){
-    //     $("#records").append("<tr><td>"+type[results[i].type]+"</td><td>"+results[i].description+"</td><td>"+(parseFloat(results[i].amount)).toFixed(2)+"</td><td>"+results[i].date+"</td><td></td></tr>");
-    // }
+// }
+
+async function draw_table(){
+    var results = await fetch_expenses();
+
+    var table = new Tabulator("#tabulator-container", {
+        data:results,
+        layout:"fitColumns",
+        responsiveLayout:"hide",
+        printHeader: true,
+        columns: [
+            {title: "ID", field: "id", widthShrink: 2, width: 50},
+            {title: "Type", field: "type", widthShrink: 1, width: 50, editor:true,},
+            {title: "Description", field: "description", widthGrow: 2, editor:true},
+            {title: "Amount", field: "amount", widthShrink: 2, editor:true},
+            {title: "Date", field: "date", widthGrow: 2, editor:true},
+        ],
+        pagination: true,
+        paginationSize: 8,
+        paginationButtonCount: 1,
+    });
 }
 
 draw_table();

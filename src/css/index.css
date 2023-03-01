@@ -7,8 +7,6 @@ div {
     background: none !important;
 }
 
-
-
 .grid-container {
     grid-template-areas:
         ". . . . . . ."

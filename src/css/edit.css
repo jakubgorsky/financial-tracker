@@ -40,6 +40,8 @@
 
 .table-container {
     grid-area: table;
+    padding: 1rem;
+    width: 100%;
 }
 
 .button-container {
@@ -50,6 +52,69 @@
     align-items: stretch;
     justify-items: stretch;
     background: rgba(100,100,100,1);
+}
+
+.tabulator-table div {
+    display: inline-block;
+}
+
+.tabulator-cell {
+    display: inline-block;
+}
+
+.tabulator-header div {
+    display: inline-block;
+}
+
+.tabulator-header-contents {
+    display: inline-block;
+}
+
+.tabulator-row {
+    background: #fff;
+    font-size: 1.2rem;
+    border-radius: 1rem;
+    border: 1px solid rgba(0,0,0,0.4);
+    box-shadow: 1rem 1rem rgba(20,20,20,0.4);
+    padding: 1rem;
+    width: 100%;
+}
+
+.tabulator-footer {
+    z-index: 2;
+}
+
+.tabulator-paginator {
+    width: 100%;
+}
+
+.tabulator-page {
+    background: #fff;
+    font-size: 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid rgba(0,0,0,0.4);
+    box-shadow: 1rem 1rem rgba(20,20,20,0.4);
+    padding: 0.5rem;
+    transition-duration: 0.2s;
+}
+
+.tabulator-page:hover {
+    box-shadow: 1.1rem 1.1rem 0.2rem rgba(20,20,20,0.4);
+    background: rgba(100,100,100,1) !important;
+    outline: 2px solid rgba(0,0,0,1);
+    text-shadow: 1rem 1rem rgba(0,0,0,0.2);
+    color: white;
+    cursor: pointer;
+}
+
+.tabulator-header {
+    background: #fff;
+    font-size: 1.2rem;
+    border-radius: 1rem;
+    border: 1px solid rgba(0,0,0,0.4);
+    box-shadow: 1rem 1rem rgba(20,20,20,0.4);
+    padding: 1rem;
+    width: 100%;
 }
 
 .picker-item {
@@ -82,11 +147,9 @@
     grid-area: table;
     font-size: 1.2rem;
     display: block;
-    border-collapse: collapse;
-    overflow: auto;
 }
 
-.table-container table {
+/* .table-container table {
     border-collapse: collapse;
     width: 100%;
     margin: 0;
@@ -125,4 +188,4 @@
 }
 .table-container table tbody tr td {
     padding: 0.5rem 0.5rem 0.5rem 1rem;
-}
+} */
